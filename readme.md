@@ -18,6 +18,9 @@ const zips = await createMacosElectronAppZip({
     
     // optional callback to show progress:
     progressCallback: (message)=>{console.log(message)},
+    // optional icon
+    // iconBytes: Deno.readFileSync("./path_to_icon.icns"),
+    
     // the main.js content (all non-node builtins need to be directly embedded)
     mainJsContent: `
         const { app, BrowserWindow } = require("electron/main")

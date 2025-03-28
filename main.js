@@ -138,7 +138,6 @@ export async function createMacosElectronAppZip({electronVersion, electronZipX86
     const zips = {}
     for (let [name, zip] of Object.entries({x86: arrayForX86, arm64: arrayForArm64})) {
         if (zip) {
-            console.debug(`Object.keys(zip) is:`,JSON.stringify(Object.keys(zip),null,2))
             // TODO: add ability to change the name of the app
             
             // rename executable
@@ -152,6 +151,9 @@ export async function createMacosElectronAppZip({electronVersion, electronZipX86
                 zip['Electron.app/Contents/Resources/electron.icns'] = { content: iconBytes, ...zip['Electron.app/Contents/Resources/electron.icns']}
             }
             progressCallback(`building zip for ${name}`)
+            delete zip['LICENSE']
+            delete zip['LICENSES.chromium.html']
+            delete zip['version']
             zips[name] = await zipCreate(zip)
             progressCallback(`built zip for ${name}`)
         }
