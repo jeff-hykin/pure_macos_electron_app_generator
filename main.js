@@ -9,7 +9,7 @@ import {zipCreate, zipParse} from "https://esm.sh/gh/jeff-hykin/good-js@b056dad/
  *     electronZipX86: Deno.readFileSync(`/Users/jeffhykin/repos/nixpkg_electron_template/tooling/electron-v32.0.0-darwin-x64.zip`),
  *     // downloaded from: https://github.com/electron/electron/releases/download/v32.0.0/electron-v32.0.0-darwin-arm64.zip
  *     electronZipArm64: Deno.readFileSync(`/Users/jeffhykin/repos/nixpkg_electron_template/tooling/electron-v32.0.0-darwin-arm64.zip`),
- *     progressCallback: (message)=>{console.log(message)}
+ *     progressCallback: (message)=>{console.log(message)},
  *     mainJsContent: `
  *         const { app, BrowserWindow } = require("electron/main")
  *         const path = require("path")
@@ -59,6 +59,13 @@ import {zipCreate, zipParse} from "https://esm.sh/gh/jeff-hykin/good-js@b056dad/
  * ```
  */
 export async function createMacosElectronAppZip({electronVersion, electronZipX86, electronZipArm64, warnInsteadOfError = false, mainJsContent, iconBytes, progressCallback=(message)=>{} }) {
+    // @summary
+    //     Download the zip straight from the Electron releases
+    //     inject the main.js content into it
+    //     replace the typical executable with a bash script that calls the original executable
+    //     optionally replace the icon
+    //     re-zip it, and return
+
     if (electronVersion.startsWith("v")) {
         electronVersion = electronVersion.slice(1)
     }
