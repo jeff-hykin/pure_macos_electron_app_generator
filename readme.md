@@ -5,7 +5,7 @@ No xcode required: a tiny library can create macOS Electron apps from a single J
 # How do I use it?
 
 ```js
-import {createMacosElectronAppZip} from "https://esm.sh/gh/jeff-hykin/pure_macos_electron_app_generator@0.0.1.1/main.js"
+import {createMacosElectronAppZip} from "https://esm.sh/gh/jeff-hykin/pure_macos_electron_app_generator@0.0.2.0/main.js"
 
 const zips = await createMacosElectronAppZip({
     electronVersion: "32.0.0",
