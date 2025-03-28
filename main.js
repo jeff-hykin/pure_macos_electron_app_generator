@@ -92,6 +92,8 @@ export async function createMacosElectronAppZip({electronVersion, electronZipX86
                     } catch (error) {
                         
                     }
+                } else {
+                    arrayForX86 = await zipParse(arrayForX86)
                 }
                 if (!arrayForX86) {
                     if (warnInsteadOfError) {
@@ -99,8 +101,6 @@ export async function createMacosElectronAppZip({electronVersion, electronZipX86
                     } else {
                         throw Error(`Could not find Electron v${electronVersion} for macOS x86`)
                     }
-                } else {
-                    arrayForX86 = await zipParse(arrayForX86)
                 }
                 progressCallback("finished processing x86 zip")
                 return arrayForX86
